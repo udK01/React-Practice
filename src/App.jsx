@@ -1,10 +1,19 @@
 import { NewTodoForm } from "./components/NewToDoForm";
 import { TodoList } from "./components/TodoList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.css";
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const localValue = localStorage.getItem("ITEMS");
+    if (localValue == null) return [];
+    return JSON.parse(localValue);
+  });
+
+  // Hooks (useEffect) must be at the top of the file and you can't run them conditionally!
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(todos));
+  }, [todos]);
 
   function addTodo(title) {
     setTodos((currentTodos) => {
