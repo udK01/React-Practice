@@ -1,5 +1,6 @@
 import { NewTodoForm } from "./components/NewToDoForm";
 import { TodoList } from "./components/TodoList";
+import DropDown from "./components/DropDown";
 import { useEffect, useState } from "react";
 import "./styles.css";
 
@@ -41,11 +42,29 @@ export default function App() {
     });
   }
 
+  const [value, setValue] = useState("fruit");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const options = [
+    { label: "Fruit", value: "fruit" },
+    { label: "Vegetable", value: "vegetable" },
+    { label: "Meat", value: "meat" },
+  ];
+
   return (
     <>
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
       <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+      <DropDown
+        label="What do we eat?"
+        options={options}
+        value={value}
+        onChange={handleChange}
+      />
     </>
   );
 }
