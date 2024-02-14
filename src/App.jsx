@@ -1,7 +1,10 @@
 import { NewTodoForm } from "./components/NewToDoForm";
 import { TodoList } from "./components/TodoList";
+import Pagination from "./components/Pagination";
 import DropDown from "./components/DropDown";
+import Badges from "./components/Badges";
 import { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
 export default function App() {
@@ -65,6 +68,8 @@ export default function App() {
         value={value}
         onChange={handleChange}
       />
+      <Badges />
+      <Pagination />
     </>
   );
 }
